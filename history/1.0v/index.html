@@ -1,0 +1,84 @@
+<!-- AI生成 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>捏捏资料打包盒</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<p data-aigc-mark="1" style="margin:0 0 8px;font-size:10px;line-height:1.3;color:#6b6560;font-weight:400;">AI生成</p>
+
+  <div class="app">
+    <aside class="sidebar">
+      <header class="brand">
+        <div class="brand-mark">成</div>
+        <div class="brand-text">
+          <h1>捏捏资料打包盒</h1>
+          <p>1.0v · 纯网页 · 打包 ZIP 下载</p>
+        </div>
+      </header>
+
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M16 16l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input id="search" type="search" placeholder="搜索课程名…" autocomplete="off" spellcheck="false" />
+        <kbd class="search-kbd">/</kbd>
+      </div>
+
+      <div class="list-meta">
+        <span id="course-count">加载中…</span>
+        <button id="reload-courses" type="button" class="link-btn">刷新</button>
+      </div>
+
+      <nav id="course-list" class="course-list" aria-label="课程列表"></nav>
+    </aside>
+
+    <main class="main">
+      <section id="empty-state" class="empty-state">
+        <div class="empty-card">
+          <h2>选择一门课程</h2>
+          <p>左侧按字母顺序列出全部课程，支持检索。点开后可浏览目录，单文件下载或按原结构打包整门课。</p>
+          <p class="hint">本版本为纯网页 1.0v：整包下载会生成 ZIP，需再保存到本地。如需直接写入项目目录请使用 2.x 本地服务版。</p>
+        </div>
+      </section>
+
+      <section id="course-panel" class="course-panel hidden">
+        <header class="course-header">
+          <div class="course-title-row">
+            <div>
+              <p class="crumb">资料库 / <span id="course-crumb">课程</span></p>
+              <h2 id="course-title">课程</h2>
+            </div>
+            <div class="course-actions">
+              <button id="btn-download-zip" type="button" class="btn primary">打包下载整门课</button>
+            </div>
+          </div>
+          <div class="course-stats">
+            <span id="file-stats">—</span>
+            <span id="size-stats"></span>
+          </div>
+          <div id="progress-wrap" class="progress-wrap hidden">
+            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+            <p id="progress-text" class="progress-text">准备中…</p>
+          </div>
+        </header>
+
+        <div class="tree-toolbar">
+          <div id="breadcrumbs" class="breadcrumbs"></div>
+          <button id="btn-download-folder" type="button" class="btn ghost hidden">下载当前文件夹</button>
+        </div>
+
+        <div id="file-tree" class="file-tree"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="vendor/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
