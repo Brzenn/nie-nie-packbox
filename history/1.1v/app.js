@@ -126,6 +126,34 @@
     return res.blob();
   }
 
+  /** 递归收集文件；单个目录失败不拖垮整包 */
+  async function collectFiles(folderPath, onProgress) {
+    const out = [];
+    const errors = [];
+    async function walk(dirPath, relPrefix) {
+      let items;
+      try {
+        items = await apiList(dirPath);
+      } catch (err) {
+        errors.push({ path: dirPath, message: err.message || String(err) });
+        onProgress?.(`跳过目录：${relPrefix || dirPath}`);
+        return;
+      }
+      for (const item of items) {
+        const rel = relPrefix ? `${relPrefix}/${item.name}` : item.name;
+        const abs = joinPath(dirPath, item.name);
+        onProgress?.(`扫描 ${rel}`);
+        if (item.is_dir) {
+          await walk(abs, rel);
+        } else {
+          out.push({ rel, abs, name: item.name, size: item.size || 0 });
+        }
+      }
+    }
+    await walk(folderPath, "");
+    return { files: out, errors };
+  }
+
   function triggerDownload(blob, filename) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -160,24 +188,7 @@
     }
   }
 
-  async function collectFiles(folderPath, onProgress) {
-    const out = [];
-    async function walk(dirPath, relPrefix) {
-      const items = await apiList(dirPath);
-      for (const item of items) {
-        const rel = relPrefix ? `${relPrefix}/${item.name}` : item.name;
-        const abs = joinPath(dirPath, item.name);
-        onProgress?.(`扫描 ${rel}`);
-        if (item.is_dir) {
-          await walk(abs, rel);
-        } else {
-          out.push({ rel, abs, name: item.name, size: item.size || 0 });
-        }
-      }
-    }
-    await walk(folderPath, "");
-    return out;
-  }
+
 
   async function walkStats(folderPath) {
     let files = 0;
@@ -228,9 +239,10 @@
     setBusy(true);
     try {
       setProgress(2, "扫描目录结构…");
-      const files = await collectFiles(folderPath, (t) => setProgress(5, t));
+      const { files, errors: walkErrors } = await collectFiles(folderPath, (t) => setProgress(5, t));
       if (!files.length) {
-        toast("该目录下没有文件");
+        const detail = walkErrors.length ? `（${walkErrors[0].message}）` : "";
+        toast(`该目录下没有可下载文件${detail}`);
         return;
       }
 
@@ -274,7 +286,8 @@
       );
       const safeName = zipRootName.replace(/[\\/:*?"<>|]/g, "_");
       triggerDownload(blob, `${safeName}.zip`);
-      toast(`已打包：${safeName}.zip（${files.length} 个文件）`);
+      const skipNote = walkErrors.length ? ` · 跳过 ${walkErrors.length} 个异常目录` : "";
+      toast(`已打包：${safeName}.zip（${files.length} 个文件${skipNote}）`);
     } catch (err) {
       console.error(err);
       toast(err.message || "打包失败");
@@ -311,14 +324,15 @@
     els.courseList.innerHTML = filtered
       .map((c) => {
         const name = escapeHtml(c.name);
-        const path = escapeHtml(c.path);
+        // 列表接口可能不带 path，必须用 ROOT + name 拼完整路径
+        const fullPath = escapeHtml(joinPath(ROOT, c.name));
         return `
       <div class="row-item${activeCourse?.name === c.name ? " active" : ""}">
-        <button type="button" class="row-open" data-open-course="${name}" data-path="${path}">
+        <button type="button" class="row-open" data-open-course="${name}">
           <span class="name">${highlight(c.name, els.search.value.trim())}</span>
           <span class="meta">点击进入目录</span>
         </button>
-        <button type="button" class="btn sm primary" data-zip="${path}" data-zip-name="${name}">下载</button>
+        <button type="button" class="btn sm primary" data-zip="${fullPath}" data-zip-name="${name}">下载</button>
       </div>`;
       })
       .join("");
