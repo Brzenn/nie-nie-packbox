@@ -1,0 +1,105 @@
+<!-- AI生成 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>捏捏资料打包盒</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<p data-aigc-mark="1" style="margin:0 0 8px;font-size:10px;line-height:1.3;color:#6b6560;font-weight:400;">AI生成</p>
+
+  <div class="app">
+    <aside class="sidebar">
+      <header class="brand">
+        <div class="brand-mark">成</div>
+        <div class="brand-text">
+          <h1>捏捏资料打包盒</h1>
+          <p>检索课程 · 下载到本地 · 网页查看</p>
+        </div>
+      </header>
+
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab active" data-tab="remote" role="tab">在线资料库</button>
+        <button type="button" class="tab" data-tab="local" role="tab">本地课程资源</button>
+      </div>
+
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M16 16l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input id="search" type="search" placeholder="搜索课程名…" autocomplete="off" spellcheck="false" />
+        <kbd class="search-kbd">/</kbd>
+      </div>
+
+      <div class="list-meta">
+        <span id="course-count">加载中…</span>
+        <button id="reload-courses" type="button" class="link-btn">刷新</button>
+      </div>
+
+      <nav id="course-list" class="course-list" aria-label="课程列表"></nav>
+
+      <footer class="side-footer">
+        <div id="server-status" class="server-status">检测本地服务…</div>
+        <div id="save-path" class="save-path"></div>
+        <button id="btn-open-full" type="button" class="btn sm primary open-full">打开完整版（推荐）</button>
+      </footer>
+    </aside>
+
+    <main class="main">
+      <div id="server-banner" class="server-banner hidden">
+        <strong>当前是「仅浏览模式」</strong>
+        <p>
+          可以检索课程并浏览目录。若要<strong>直接下载到项目文件夹</strong>并<strong>在网页中查看本地文件</strong>，
+          请运行 <code>start.bat</code> 或 <code>python server.py</code>，然后使用
+          <code id="full-url">http://127.0.0.1:8765</code>。
+        </p>
+        <p><button id="btn-open-full-2" type="button" class="btn sm primary">打开完整版</button></p>
+      </div>
+
+      <section id="empty-state" class="empty-state">
+        <div class="empty-card">
+          <h2>选择一门课程</h2>
+          <p>左侧可检索全部课程。打开后可浏览目录，并把资料按原结构下载到本地的 <strong>课程资源</strong> 文件夹；下载完成即可在网页中直接查看。</p>
+        </div>
+      </section>
+
+      <section id="course-panel" class="course-panel hidden">
+        <header class="course-header">
+          <div class="course-title-row">
+            <div>
+              <h2 id="course-title">课程</h2>
+              <p class="crumb"><span id="source-label">在线资料库</span> · <span id="course-crumb">课程</span></p>
+            </div>
+            <div class="course-actions">
+              <button id="btn-download" type="button" class="btn primary">打包下载</button>
+              <button id="btn-open-local" type="button" class="btn ghost hidden">打开本地文件夹</button>
+            </div>
+          </div>
+          <div class="course-stats">
+            <span id="file-stats">—</span>
+            <span id="size-stats"></span>
+          </div>
+          <div id="progress-wrap" class="progress-wrap hidden">
+            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+            <p id="progress-text" class="progress-text">准备中…</p>
+          </div>
+        </header>
+
+        <div class="tree-toolbar">
+          <div id="breadcrumbs" class="breadcrumbs"></div>
+          <button id="btn-download-folder" type="button" class="btn ghost hidden">下载当前文件夹</button>
+        </div>
+
+        <div id="file-tree" class="file-tree"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="vendor/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
