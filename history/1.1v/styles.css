@@ -79,6 +79,63 @@ button { cursor: pointer; border: 0; background: none; }
   letter-spacing: 0.02em;
 }
 
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.more-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.more-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+
+.more-btn:active { background: var(--surface-2); }
+
+.more-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: 180px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 6px;
+}
+
+.more-menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.more-menu a:active { background: var(--surface-2); }
+
+.more-star {
+  margin: 4px 0 0;
+  padding: 10px 12px 4px;
+  border-top: 1px dashed var(--line);
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+
 .brand-text p {
   margin: 2px 0 0;
   color: var(--ink-muted);

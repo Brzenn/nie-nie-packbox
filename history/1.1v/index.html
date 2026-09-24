@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#2d6a4f" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>捏捏资料打包盒 · 手机版</title>
+  <title>捏捏资料打包盒</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,7 +14,18 @@
       <div class="brand">
         <div class="brand-mark">成</div>
         <div class="brand-text">
-          <h1>捏捏资料打包盒</h1>
+          <div class="brand-title-row">
+            <h1>捏捏资料打包盒</h1>
+            <div class="more-wrap">
+              <button type="button" class="more-btn" id="btn-more" aria-haspopup="true">更多</button>
+              <div class="more-menu hidden" id="more-menu" role="menu">
+                <a role="menuitem" href="https://openlist.truraly.fun/%E6%88%90%E8%B4%A8%E5%AD%A6%E9%99%A2%E8%AF%BE%E7%A8%8B%E6%94%BB%E7%95%A5%E5%85%B1%E4%BA%AB%E8%AE%A1%E5%88%92/%E8%B5%84%E6%96%99%E5%BA%93" target="_blank" rel="noopener">捏捏资料库</a>
+                <a role="menuitem" href="http://47.100.218.19/nienie/nie-nie-packbox-2.5.1v.zip" target="_blank" rel="noopener">电脑版 ZIP 下载</a>
+                <a role="menuitem" href="https://github.com/Brzenn/nie-nie-packbox" target="_blank" rel="noopener">GitHub</a>
+                <p class="more-star">求个 star，谢谢喵~</p>
+              </div>
+            </div>
+          </div>
           <p>手机版 · 点右侧按钮直接下载</p>
         </div>
       </div>
@@ -59,5 +70,19 @@
   <div id="toast" class="toast hidden" role="status"></div>
   <script src="vendor/jszip.min.js"></script>
   <script src="app.js"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById("btn-more");
+      var menu = document.getElementById("more-menu");
+      if (!btn || !menu) return;
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        menu.classList.toggle("hidden");
+      });
+      document.addEventListener("click", function () {
+        menu.classList.add("hidden");
+      });
+    })();
+  </script>
 </body>
 </html>
