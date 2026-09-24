@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / "dist"
-APP_NAME = "成贤课程资料库"
+APP_NAME = "捏捏资料打包盒-2.5.1v"
 
 ASSETS = [
     "index.html",
@@ -52,7 +52,7 @@ def main() -> None:
     subprocess.check_call(args)
     out = DIST / APP_NAME
     print("\n打包完成:", out)
-    print("双击其中的 成贤课程资料库.exe 即可使用")
+    print(f"双击其中的 {APP_NAME}.exe 即可使用")
 
 
 if __name__ == "__main__":

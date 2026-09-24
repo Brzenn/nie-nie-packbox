@@ -1,9 +1,17 @@
 # 成贤资料库 · 2.5.1v
 
 感谢 **捏捏学长** 整理并开放资料。  
-原站：<https://openlist.truraly.fun/成贤学院课程攻略共享计划/资料库>
+原站：<https://openlist.truraly.fun/%E6%88%90%E8%B4%A4%E5%AD%A6%E9%99%A2%E8%AF%BE%E7%A8%8B%E6%94%BB%E7%95%A5%E5%85%B1%E4%BA%AB%E8%AE%A1%E5%88%92>
 
 2.5v 基础上，标题旁「原链跳转」改为「更多」菜单。其它功能不变。
+
+## 下载
+
+| 方式 | 地址 |
+|------|------|
+| **程序 zip（推荐）** | [捏捏资料打包盒-2.5.1v.zip](https://github.com/Brzenn/nie-nie-packbox/raw/main/程序/捏捏资料打包盒-2.5.1v.zip) |
+| 本目录源码 | 直接使用 `start.bat` 或 `python server.py` |
+| 手机网页版 | <http://47.100.218.19/nienie/> |
 
 ## 功能
 
@@ -14,3 +22,4 @@
 
 - 「原链跳转」→「更多」下拉菜单
 - 菜单含：资料库、手机版 <http://47.100.218.19/nienie/>、GitHub
+- 已打包为独立 Windows 程序（`程序/捏捏资料打包盒-2.5.1v/`）

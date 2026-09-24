@@ -1,0 +1,8 @@
+﻿__pycache__/
+server.log
+config.json
+*.tmp
+history/2.5.1v/build/
+history/2.5.1v/dist/
+history/2.5.1v/__pycache__/
+zip-out/
