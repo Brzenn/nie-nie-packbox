@@ -91,25 +91,31 @@ button { cursor: pointer; border: 0; background: none; }
   flex-shrink: 0;
 }
 
+/* 与「下载」同级的实体按钮 */
 .more-btn {
+  min-height: 36px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
   border: 1px solid var(--line-strong);
   background: var(--surface);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 11px;
-  line-height: 1.4;
-  color: var(--ink-muted);
-  cursor: pointer;
+  color: var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  white-space: nowrap;
 }
 
-.more-btn:active { background: var(--surface-2); }
+.more-btn:active {
+  background: var(--surface-2);
+  transform: translateY(1px);
+}
 
 .more-menu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   right: 0;
   z-index: 40;
-  min-width: 180px;
+  min-width: 188px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -119,18 +125,23 @@ button { cursor: pointer; border: 0; background: none; }
 
 .more-menu a {
   display: block;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 8px;
   color: var(--ink);
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
 }
 
-.more-menu a:active { background: var(--surface-2); }
+.more-menu a:active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
 
 .more-star {
   margin: 4px 0 0;
-  padding: 10px 12px 4px;
+  padding: 10px 14px 4px;
   border-top: 1px dashed var(--line);
   color: var(--ink-muted);
   font-size: 12px;
